@@ -38,7 +38,7 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({
       success: true,
-      user: { id: user._id, email: user.email }
+      user: { id: user._id, email: user.email, createdAt: user.createdAt }
     });
   } catch (error) {
     console.error('Registration error:', error);
@@ -71,7 +71,7 @@ router.post('/login', async (req, res) => {
 
     res.json({
       success: true,
-      user: { id: user._id, email: user.email }
+      user: { id: user._id, email: user.email, createdAt: user.createdAt }
     });
   } catch (error) {
     console.error('Login error:', error);
@@ -100,7 +100,7 @@ router.get('/me', async (req, res) => {
       return res.status(401).json({ message: 'User not found' });
     }
 
-    res.json({ success: true, user });
+    res.json({ success: true, user: { id: user._id, email: user.email, createdAt: user.createdAt } });
   } catch (error) {
     res.status(401).json({ message: 'Invalid token' });
   }
